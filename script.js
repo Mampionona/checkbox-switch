@@ -1,5 +1,10 @@
 $(function () {
     $.fn.switch = function (options) {
+        /**
+         * Options :
+         * color [String] default ""
+         * onChange [Function] default null
+         */
         return this.each(function () {
             if (this.type !== "checkbox") {
                 return;
@@ -48,13 +53,15 @@ $(function () {
                     container.removeClass(checkedClassName);
                 }
 
-                options.onChange(e);
+                if (typeof options.onChange === "function") {
+                    options.onChange(e);
+                }
             });
         });
     };
 
     $(":checkbox").switch({
-        color: "blue",
+        // color: "blue",
         onChange: function (e) {
             console.log(e);
         }
